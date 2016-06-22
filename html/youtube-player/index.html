@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Vagtube player</title>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+  </head>
+  <body>
+    <center>
+      <h1>Vagtube \:D/</h1>
+      <div id="player"></div><br/>
+      Enter Youtube video ID:
+      <input type="text" name="yt_id" id="yt_id" size="30" maxlength="12" placeholder="0taSnE_wWUY" /> <!-- The ID of the video which is loaded by default -->
+    </center>
+
+    <script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+          videoId: '0taSnE_wWUY',
+          playerVars: {
+            'loop' : 1
+          },
+          events: {
+            'onReady': addToPlaylist
+          }
+        });
+      }
+
+      function stopVideo() {
+        player.pauseVideo();
+      }
+      function playVideo() {
+        player.playVideo();
+      }
+      function loadNewVideo(id) {
+        player.loadVideoById(id, 5, "large");
+      }
+      function addToPlaylist(event) {
+        event.target.cuePlaylist(player.getVideoUrl().split("v=")[1]);
+        event.target.setLoop(true);
+      }
+
+      // firebase stuff
+      var myDataRef = new Firebase('<REST_URL>');
+      myDataRef.on("child_changed", function(snapshot) {
+        var currentvalue = snapshot.val();
+        console.log("firebase event detected");
+        if (currentvalue === "yes" ) {
+          playVideo();
+        } else {
+          stopVideo();
+      });
+
+      // change video script
+      $("#yt_id").keyup(function(event) {
+        if (event.keyCode == 13) {
+          loadNewVideo($("#yt_id").val());
+          player.seekTo(0);
+          player.cuePlaylist($("#yt_id").val());
+          player.setLoop(true);
+        }
+      });
+    </script>
+  </body>
+</html>

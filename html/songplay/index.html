@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>in case of party, break glass</title>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+  </head>
+  <body>
+    <script>
+var myDataRef = new Firebase('<REST_URL>');
+      var selectedaudioelement = "audio_element";
+      
+      myDataRef.on("child_changed", function(snapshot) {
+        var currentvalue = snapshot.val();
+        console.log("firebase event detected");
+        var music = document.getElementById(selectedaudioelement); // jquery selectors do not like <audio> methods
+        if (currentvalue === "yes" ) { //yeah, i use "yes" and "no" strings as booleans. because .json.
+          music.play();
+          $("#pic").attr("src", "play.png");
+        } else {
+          music.pause(); 
+          $("#pic").attr("src", "pause.png");
+        }
+      });
+
+
+      $(function() {  // on load of page
+        console.log("Page refreshed, set music off"); // only works if your firebase database is set to be writable without security tokens
+        myDataRef.update({ "needmusic" : "no"});
+        
+      });
+      
+    </script>
+    <center>
+      <img src="pause.png" id="pic" height="700" />
+    </center>
+    <audio id="audio_element" loop>
+      <source src="audio.ogg" type="audio/ogg"> <!-- firefox likes .ogg-->
+      <source src="audio.aac" type="audio/mpeg"> <!-- webkits like .m4a -->
+    </audio>
+  </body>
+</html>
