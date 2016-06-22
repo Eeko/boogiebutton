@@ -9,7 +9,7 @@
       <h1>Vagtube \:D/</h1>
       <div id="player"></div><br/>
       Enter Youtube video ID:
-      <input type="text" name="yt_id" id="yt_id" size="30" maxlength="12" placeholder="0taSnE_wWUY" /> <!-- The ID of the video which is loaded by default -->
+      <input type="text" name="yt_id" id="yt_id" size="30" maxlength="12" placeholder="0taSnE_wWUY" />
     </center>
 
     <script>
@@ -22,7 +22,7 @@
         player = new YT.Player('player', {
           height: '390',
           width: '640',
-          videoId: '0taSnE_wWUY',
+          videoId: '0taSnE_wWUY', // The ID of the video which is loaded by default
           playerVars: {
             'loop' : 1
           },
