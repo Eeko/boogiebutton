@@ -14,9 +14,9 @@ In the example, the NodeMCU is wired pretty much like this.
 
 Not the most robust of constructs nor the most stable one, but does her job.
 
-NodeMCU connects to Firebase via Wi-Fi, so you should replace the <SSID_OF_ACCESSPOINT> and <WPA_PASSWORD> -placeholders from src/lua/init.lua with your own.
+NodeMCU connects to Firebase via Wi-Fi, so you should replace the ``<SSID_OF_ACCESSPOINT>`` and ``<WPA_PASSWORD>`` -placeholders from src/lua/init.lua with your own.
 
-You also need to replace the <REST_URL> -placeholder from src/lua/init.lua and all sample index.html's with the URL of your firebase database. Also remember to configure your Firebase to require a security token for all write-oprations. This should be inserted in <SECURITY_TOKEN_FROM_FIREBASE> -placeholder in src/lua/init.lua.
+You also need to replace the ``<REST_URL>`` -placeholder from src/lua/init.lua and all sample index.html's with the URL of your firebase database. Also remember to configure your Firebase to require a security token for all write-oprations. This should be inserted in ``<SECURITY_TOKEN_FROM_FIREBASE>`` -placeholder in src/lua/init.lua.
 
 You also need your own audio samples for the songplay -example. Add them as audio.(ogg|acc) to the same directory where you have the html/songplay/index.html .
 
