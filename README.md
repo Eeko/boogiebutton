@@ -7,10 +7,10 @@ The frontend examples are simple html with some javascript, websocket to Firebas
 
 In the example, the NodeMCU is wired pretty much like this.
 
->   +--Switch---+
->   |           |
->   |           |
-> IO-PIN.4     GND
+       +--Switch---+ 
+       |           | 
+       |           | 
+     IO-PIN.4     GND
 
 Not the most robust of constructs nor the most stable one, but does her job.
 
